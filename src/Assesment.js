@@ -11,10 +11,12 @@ let userInput = "";
 
 const spinner = createSpinner();
 
+//This func add gaps as the name suggest
 function gap() {
   console.log("\n");
 }
 
+//You enter the input in with this func here.
 async function enterInput() {
   const answers = await inquirer.prompt({
     name: "user_input",
@@ -47,6 +49,7 @@ async function enterInput() {
   }
 }
 
+//This let's you select one of the three options.
 async function question() {
   gap();
   const answers = await inquirer.prompt({
@@ -59,6 +62,7 @@ async function question() {
   return handleAnswer(answers);
 }
 
+//This func creates an object out of our answer and our choice
 function handleAnswer(e) {
   let Obj = {
     text: userInput,
@@ -67,6 +71,7 @@ function handleAnswer(e) {
   return postData(Obj);
 }
 
+//This func based on user choice returns the value that api accepts
 function modeCheck(e) {
   if (e == "Standard Mode") {
     return "standard";
@@ -81,6 +86,7 @@ function modeCheck(e) {
   return "Inavalid Input";
 }
 
+//This func post the data to the api
 function postData(e) {
   gap();
   spinner.start({ text: "sending request", color: "yellow" });
@@ -97,6 +103,7 @@ function postData(e) {
     .catch((err) => spinner.error({ text: err.message, color: "red" }));
 }
 
+//This func finally formats the data based on the result
 function waitforAnswer(e) {
   userInput = e.data.join("");
 
